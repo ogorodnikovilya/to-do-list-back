@@ -1,46 +1,36 @@
-const Task = require('../../db/models/task/index');
+const Task = require('../../model/task');
 
 module.exports.getAllTasks = (req, res) => {
   Task.find().then(result => {
     res.send({data: result});
-}).catch(err => {
-    res.send(err);
-  });
+  }).catch(err => res.send(err));
 };
 
 module.exports.createNewTask = (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
   const body = req.body;
 
-  if ((body.hasOwnProperty('text') || body.hasOwnProperty('isCheck'))) {
+  if (body.hasOwnProperty('text')) {
     const task = new Task({
       text: body.text,
       isCheck : body.isCheck
-      });
-
+    });
     task.save().then(result => {
       res.send(result);
     }).catch(err => res.send(err));
-  }
+  };
 };
 
 module.exports.changeTaskInfo = (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
   const body = req.body;
-  const selector = {_id: body._id};
-    
-  if(body.hasOwnProperty('text') && body.hasOwnProperty('_id') || body.hasOwnProperty('isCheck') ){
-    Task.updateOne(selector, {
-      $set: {
-        text: body.text,
-        isCheck: body.isCheck
-      }
-    }).then(result => {
-        res.send(result);
-    }).catch(err => {
-      res.send(err);
+
+  // Один PATH на бэке объединяет два патча на фронте: один на изменение чекбокса, другой на изменение текста
+  Task.updateOne({_id: body._id}, {
+    $set: body
+  }).then(result => {
+    res.send(result);
+  }).catch(err => {
+    res.send(err);
     })
-  }
 };
 
 module.exports.deleteTask = (req, res) => {
@@ -61,4 +51,4 @@ module.exports.deleteAllTask = (req, res) => {
   }).catch(err => {
     res.send(err);
   })
-}
+};
