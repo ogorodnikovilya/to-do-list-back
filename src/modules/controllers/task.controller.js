@@ -24,25 +24,25 @@ module.exports.changeTaskInfo = (req, res) => {
   const body = req.body;
 
   // Один PATH на бэке объединяет два патча на фронте: один на изменение чекбокса, другой на изменение текста
-  Task.updateOne({_id: body._id}, {
-    $set: body
-  }).then(result => {
+  Task.updateOne(
+    {_id: body._id},
+    { $set: body},
+    ).then(result => {
     res.send(result);
   }).catch(err => {
     res.send(err);
-    })
+  });
 };
 
 module.exports.deleteTask = (req, res) => {
   const id = req.query.id;
-
-  if(id) {
-    Task.deleteOne({_id: id}).then(() => {
-      res.send('Deleted');
+  Task.deleteOne({_id: id}).then(() => { 
+    Task.find().then(result => {          
+      res.send(result);                 
     }).catch(err => {
       res.send(err);
-    })
-  };
+    });   
+  });
 };
 
 module.exports.deleteAllTask = (req, res) => {
@@ -50,5 +50,5 @@ module.exports.deleteAllTask = (req, res) => {
     res.send('Deleted');
   }).catch(err => {
     res.send(err);
-  })
+  });
 };
