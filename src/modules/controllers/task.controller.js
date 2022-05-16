@@ -27,7 +27,7 @@ module.exports.changeTaskInfo = (req, res) => {
   Task.updateOne(
     {_id: body._id},
     { $set: body},
-    ).then(result => {
+  ).then(result => {
     res.send(result);
   }).catch(err => {
     res.send(err);
