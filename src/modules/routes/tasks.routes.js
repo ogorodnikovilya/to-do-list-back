@@ -4,15 +4,17 @@ const router = express.Router();
 const {
   getAllTasks,
   createNewTask,
-  changeTaskInfo,
+  changeTaskText,
+  changeTaskCheck,
   deleteTask,
   deleteAllTask
-} = require('../controllers/task.controller');
+} = require('../controllers/tasks.controller');
 
 
 router.get('/allTasks', getAllTasks);
 router.post('/createTask', createNewTask);
-router.patch('/updateTask', changeTaskInfo);
+router.patch('/updateTaskText', changeTaskText);
+router.patch('/updateTaskCheck', changeTaskCheck);
 router.delete('/deleteTask', deleteTask);
 router.delete('/deleteAllTask', deleteAllTask);
 
