@@ -32,9 +32,9 @@ const changeTaskText = (req, res) => {
       throw new Error();
     }
     Task.findOneAndUpdate(
-      {_id: _id},
-      { $set: req.body},
-      { new: true}
+      { _id: _id },
+      { $set: req.body },
+      { new: true }
     ).then(() => { 
       Task.find().then(result => {          
         res.status(200).send(result);                 
@@ -54,9 +54,9 @@ const changeTaskCheck = (req, res) => {
       throw new Error();
     }
     Task.findOneAndUpdate(
-      {_id: _id},
-      { $set: req.body},
-      { new: true}
+      { _id: _id },
+      { $set: req.body },
+      { new: true }
     ).then(() => { 
       Task.find().then(result => {          
         res.status(200).send(result);                 
@@ -72,7 +72,7 @@ const changeTaskCheck = (req, res) => {
 const deleteTask = (req, res) => {
   try {
     const id = req.query.id;
-    Task.deleteOne({_id: id}).then((result) => {          
+    Task.deleteOne({ _id: id }).then((result) => {          
       res.status(200).send(result);                 
     })
   } catch (error) {
