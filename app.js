@@ -10,6 +10,8 @@ const apiRoutes = require('./src/modules/routes/tasks.routes');
 app.use(cors({
   'Access-Control-Allow-Origin': '*'
 }));
+app.use(express.json());
+app.use("/", apiRoutes);
 
 const init = async() => {
   try {
@@ -19,8 +21,6 @@ const init = async() => {
       useNewUrlParser: true
     })
     .catch(error => console.error(error));
-    app.use(express.json());
-    app.use("/", apiRoutes);
     
     app.listen(8080, () => {
       console.log('App listening on port 8080');
