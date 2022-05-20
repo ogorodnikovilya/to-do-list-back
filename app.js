@@ -15,8 +15,7 @@ app.use("/", apiRoutes);
 
 const init = () => {
   try {
-    mongoose
-    .connect(process.env.URL, {
+    mongoose.connect(process.env.URL, {
       useUnifiedTopology: true,
       useNewUrlParser: true
     });

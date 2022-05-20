@@ -20,10 +20,10 @@ const createNewTask = (req, res) => {
     ) {
       throw new Error();
     };
-      const task = new Task(req.body);
-      task.save().then(result => {
-        res.status(200).send(result);
-      })
+    const task = new Task(req.body);
+    task.save().then(result => {
+      res.status(200).send(result);
+    });
   } catch (error) {
     res.status(404).send({message: 'Fail in create task'});
   };
