@@ -13,19 +13,20 @@ app.use(cors({
 app.use(express.json());
 app.use("/", apiRoutes);
 
-const init = async() => {
+const init = () => {
   try {
     mongoose
     .connect(process.env.URL, {
-      useUnifiedTopology: true, 
+      useUnifiedTopology: true,
       useNewUrlParser: true
-    })
+    });
     
     app.listen(8080, () => {
       console.log('App listening on port 8080');
     });
   } catch (error) {
     console.error(error);
+    process.exit(1);
   }
 };
 

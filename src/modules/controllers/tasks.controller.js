@@ -13,7 +13,11 @@ const getAllTasks = (req, res) => {
 const createNewTask = (req, res) => {
   try {
     const { text, isCheck } = req.body;
-    if (text === '' || typeof text !== 'string' || isCheck !== false || typeof isCheck !== 'boolean') {
+    if (text === '' 
+      || typeof text !== 'string'
+      || isCheck !== false 
+      || typeof isCheck !== 'boolean'
+    ) {
       throw new Error();
     };
       const task = new Task(req.body);
@@ -35,8 +39,8 @@ const changeTaskText = (req, res) => {
       { _id: _id },
       { $set: { _id, text } },
       { new: true }
-    ).then(result => { 
-      res.status(200).send(result);   
+    ).then(result => {
+      res.status(200).send(result);
     });
   } catch (error) {
     res.status(404).send({message: 'Fail in change task'});
@@ -55,7 +59,7 @@ const changeTaskCheck = (req, res) => {
     ).then(() => {
       Task.find().sort({isCheck: 1}).then(result => {
         res.status(200).send(result);
-      }); 
+      });
     });
   } catch (error) {
     res.status(404).send({message: 'Fail in change task'});
@@ -65,8 +69,8 @@ const changeTaskCheck = (req, res) => {
 const deleteTask = (req, res) => {
   try {
     const id = req.query.id;
-    Task.deleteOne({ _id: id }).then((result) => {          
-      res.status(200).send(result);                 
+    Task.deleteOne({ _id: id }).then((result) => {
+      res.status(200).send(result);
     });
   } catch (error) {
     res.status(404).send({message: 'Fail in delete task'});
