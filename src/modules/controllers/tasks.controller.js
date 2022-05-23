@@ -25,7 +25,7 @@ const createNewTask = (req, res) => {
       res.status(200).send(result);
     });
   } catch (error) {
-    res.status(404).send({message: 'Fail in create task'});
+    res.status(406).send({message: 'Fail in create task'});
   };
 };
 
@@ -43,7 +43,7 @@ const changeTaskText = (req, res) => {
       res.status(200).send(result);
     });
   } catch (error) {
-    res.status(404).send({message: 'Fail in change task'});
+    res.status(409).send({message: 'Fail in change task'});
   };
 };
 
@@ -62,7 +62,7 @@ const changeTaskCheck = (req, res) => {
       });
     });
   } catch (error) {
-    res.status(404).send({message: 'Fail in change task'});
+    res.status(409).send({message: 'Fail in change task'});
   };
 };
 
