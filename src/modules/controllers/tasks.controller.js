@@ -6,7 +6,7 @@ const getAllTasks = (req, res) => {
       res.status(200).send({data: result});
     });
   } catch (error) {
-    res.status(404).send({message: 'Fail in get all tasks'});
+    res.status(400).send({message: 'Fail in get all tasks'});
   };
 };
 
@@ -20,12 +20,12 @@ const createNewTask = (req, res) => {
     ) {
       throw new Error();
     };
-    const task = new Task(req.body);
+    const task = new Task({ text, isCheck });
     task.save().then(result => {
       res.status(200).send(result);
     });
   } catch (error) {
-    res.status(406).send({message: 'Fail in create task'});
+    res.status(400).send({message: 'Fail in create task'});
   };
 };
 
@@ -43,7 +43,7 @@ const changeTaskText = (req, res) => {
       res.status(200).send(result);
     });
   } catch (error) {
-    res.status(409).send({message: 'Fail in change task'});
+    res.status(400).send({message: 'Fail in change task'});
   };
 };
 
@@ -73,7 +73,7 @@ const deleteTask = (req, res) => {
       res.status(200).send(result);
     });
   } catch (error) {
-    res.status(404).send({message: 'Fail in delete task'});
+    res.status(400).send({message: 'Fail in delete task'});
   };
 };
 
@@ -83,7 +83,7 @@ const deleteAllTask = (req, res) => {
       res.status(200).send({message: 'Deleted'});
     });
   } catch (error) {
-    res.status(404).send({message: 'Fail in delete tasks'});
+    res.status(400).send({message: 'Fail in delete tasks'});
   };
 };
 
