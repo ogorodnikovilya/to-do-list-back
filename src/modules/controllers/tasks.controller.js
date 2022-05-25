@@ -62,7 +62,7 @@ const changeTaskCheck = (req, res) => {
       });
     });
   } catch (error) {
-    res.status(409).send({message: 'Fail in change task'});
+    res.status(400).send({message: 'Fail in change task'});
   };
 };
 
