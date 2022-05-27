@@ -3,7 +3,7 @@ const Task = require('../../model/task');
 const getAllTasks = (req, res) => {
   try {
     Task.find().sort({isCheck: 1}).then(result => {
-      res.status(200).send({data: result});
+      res.status(200).send(result);
     });
   } catch (error) {
     res.status(400).send({message: 'Fail in get all tasks'});
